@@ -11,11 +11,11 @@ module read_bit(
    input in_bit,
    output reg [15:0]CRC_code
 );
-   always @(sign_cnt) begin
-   if (sign_cnt >= 2)
-       CRC_code[sign_cnt-2] <= in_bit;
+   always @(*) begin
+   if (sign_cnt >= 1)
+       CRC_code[sign_cnt-1] <= in_bit;
    else
-       CRC_code[sign_cnt+14] <= in_bit;
+       CRC_code[sign_cnt+15] <= in_bit;
    end
 endmodule
 

@@ -25,7 +25,7 @@ module sim;
     // Test sequence
     initial begin
         // Initialize inputs
-       inputdata <= 8'b01011011;
+       inputdata <= 8'b10111011;
         
         // Wait for a few clock cycles
         #20;
