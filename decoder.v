@@ -31,5 +31,6 @@ module crc8_decoder_strict_add #(
     end
 
     assign crc_ok = (temp[7:0] == 8'h00);
+    assign data_out = crc_ok ? codeword[15:8] : {K{1'b1}};
 
 endmodule
