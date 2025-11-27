@@ -9,7 +9,7 @@ endmodule
 module read_bit(
    input clk_sys,
    input rst_n,
-   input phase,
+   input [7:0] phase,
    input [3:0]sign_cnt,
    input in_bit,
    output reg [15:0]CRC_code
