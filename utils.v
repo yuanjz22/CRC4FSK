@@ -14,8 +14,8 @@ module read_bit(
    input in_bit,
    output reg [15:0]CRC_code
 );
-    always @(posedge clk_sys or negedge rst_n) begin
-        if (!rst_n) begin
+    always @(posedge clk_sys or posedge rst_n) begin
+        if (rst_n) begin
             CRC_code <= 16'b0;
         end else if (phase == 0) begin  // Only update when phase is 0
             // Store bit at position based on sign_cnt
@@ -38,8 +38,8 @@ module clk_trans(
 	 
    assign sign_clk = (phase == 0);
 	 
-   always @(posedge clk_sys or negedge reset) begin
-       if (!reset) begin
+   always @(posedge clk_sys or posedge reset) begin
+       if (reset) begin
            phase <= 0;
            sign_cnt <= 0;
        end

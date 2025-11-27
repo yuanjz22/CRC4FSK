@@ -545,8 +545,8 @@ module FSK_modulator (
     // ============================================================
     // 3. 主逻辑 (时序逻辑)
     // ============================================================
-    always @(posedge sys_clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always @(posedge sys_clk or posedge rst_n) begin
+        if (rst_n) begin
             signal <= 8'sd0;
         end
         else begin

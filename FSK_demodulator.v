@@ -554,8 +554,8 @@ module FSK_demodulator (
     // ============================================================
     // 3. 主逻辑 (完全同步设计)
     // ============================================================
-    always @(posedge sys_clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always @(posedge sys_clk or posedge rst_n) begin
+        if (rst_n) begin
             correlation1 <= 0;
             correlation2 <= 0;
             sign <= 0;

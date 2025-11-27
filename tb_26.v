@@ -34,6 +34,8 @@ module sim;
         reset = 1;
         @(posedge clk);
 
+        reset = 0;
+
         // Initialize inputs
         inputdata <= 8'b10111011;
 

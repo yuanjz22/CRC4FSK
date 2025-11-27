@@ -52,7 +52,7 @@ module cmxsb(
          .signal(channel)
     );
 
-   // asssume capcity channel(noise added here if needed)
+   // asssume capcity channel(noise added here if needed)   
 
    // FSK Demodulation
     FSK_demodulator FSK_demodulator1(
