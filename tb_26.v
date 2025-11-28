@@ -1,0 +1,68 @@
+`timescale 1ns / 1ps
+
+module sim;
+    // Testbench signals
+    reg clk;
+    reg reset;
+    reg next;
+    wire [7:0] inputdata;
+    wire [7:0] outputdata;
+
+    // Instantiate the mail module
+    cmxsb uut (
+        .sys_clk(clk),
+        .reset(reset),
+        .next(next),
+        .inputdata(inputdata),
+        .outputdata(outputdata)
+    );
+
+    // Clock generation
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk; // 100MHz clock, period of 10ns
+    end
+    initial begin
+    end
+    // Test sequence
+    initial begin
+        // Initialize all inputs
+        reset = 0;      // Assert reset
+        next = 0;
+        
+        // Wait with reset asserted
+        repeat(3) @(posedge clk);
+        
+        // Deassert reset
+        reset = 1;
+        @(posedge clk);
+
+        reset = 0;
+
+        // Initialize inputs
+        // inputdata <= 8'b10111011;
+
+        // Apply test vector to inputdata
+//        inputdata = 100'b0110101010110001100110101111001111011011100001001011010000111111101000001100110110011110100010111001;
+        // #1000000000;
+
+        repeat(5) @(posedge clk);
+
+        repeat (8) begin
+            @(posedge clk);
+            next = 1;
+            @(posedge clk);
+            next = 0;
+            // 等待一段时间，让 tx / rx 过程能观测到变化
+            repeat (25600) @(posedge clk);
+        end
+
+        // $stop;
+    end
+
+    // Monitoring
+    initial begin
+        $monitor("Time: %0d ns, inputdata: %b, outputdata: %b", $time, inputdata, outputdata);
+    end
+
+endmodule
